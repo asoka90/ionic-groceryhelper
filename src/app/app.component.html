@@ -1,3 +1,32 @@
 <ion-app>
-  <ion-router-outlet id="main-content"></ion-router-outlet>
+  <ion-menu menuId="custom" contentId="main">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item routerLink="/checklist">
+            <ion-icon name="list-outline" slot="start"></ion-icon>
+            <ion-label>Checklist</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/budget">
+            <ion-icon name="wallet-outline" slot="start"></ion-icon>
+            <ion-label>Budget Manager</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/notes">
+            <ion-icon name="newspaper-outline" slot="start"></ion-icon>
+            <ion-label>Notes</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
