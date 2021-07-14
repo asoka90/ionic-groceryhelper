@@ -22,7 +22,12 @@ const routes: Routes = [
   {
     path: 'notes',
     loadChildren: () => import('./pages/notes/notes.module').then( m => m.NotesPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   }
+
 
 
 ];
