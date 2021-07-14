@@ -14,7 +14,7 @@ export class LoaderPage implements OnInit {
   
   ngOnInit() {
     setTimeout(() => {
-      this.router.navigate(['checklist'])
+      this.router.navigate(['home'])
       }, 3000);
   }
 
