@@ -10,9 +10,18 @@ const routes: Routes = [
   {
     path: 'loader',
     loadChildren: () => import('./pages/loader/loader.module').then( m => m.LoaderPageModule)
-  },  {
+  },
+  {
     path: 'checklist',
     loadChildren: () => import('./pages/checklist/checklist.module').then( m => m.ChecklistPageModule)
+  },
+  {
+    path: 'budget',
+    loadChildren: () => import('./pages/budgetmanager/budgetmanager.module').then( m => m.BudgetmanagerPageModule)
+  },
+  {
+    path: 'notes',
+    loadChildren: () => import('./pages/notes/notes.module').then( m => m.NotesPageModule)
   }
 
 
