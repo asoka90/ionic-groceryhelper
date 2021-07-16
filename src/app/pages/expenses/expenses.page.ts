@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ExpensesModalComponent } from 'src/app/components/expenses-modal/expenses-modal.component';
 
 @Component({
   selector: 'app-expenses',
@@ -7,9 +8,9 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./expenses.page.scss'],
 })
 export class ExpensesPage implements OnInit {
-  items: any [] = [];
+  inputExpenses: any [] = [];
 
-  constructor(public alert : AlertController) { }
+  constructor(private alert : AlertController, private modalCtrl : ModalController) { }
 
   ngOnInit() {
   }
@@ -22,36 +23,17 @@ export class ExpensesPage implements OnInit {
     alert("Hey");
   }
 
-  add(){
-    this.alert.create({
-      header: "Add",
-      inputs: [
-        {
-          name: 'expensess',
-          type: 'text',
-          placeholder: 'Title'
-        }
-      ],
-      buttons: [
-        {
-            text: 'No',
-            handler: () => {
-              console.log('I care about humanity');
-          }
-        },
-        {
-          text: 'Yes',
-          handler: (alertData) => {
-            this.items.push(alertData.expensess);
-            console.log(this.items);
-          }
-        } 
-      ]
-    }).then(res => {
-      res.present();
+  // Open Modal
+  async openModal(){
+    const modal = await this.modalCtrl.create({
+      component : ExpensesModalComponent
     });
-  }
 
+    await modal.present();
+  }
+  // 
+
+  // Alert Dialog
   delete(i){
     this.alert.create({
       header: 'Delete',
@@ -66,7 +48,7 @@ export class ExpensesPage implements OnInit {
         {
           text: 'Yes',
           handler: () => {
-            this.items.splice(i, 1);
+            this.inputExpenses.splice(i, 1);
           }
         }
     ]

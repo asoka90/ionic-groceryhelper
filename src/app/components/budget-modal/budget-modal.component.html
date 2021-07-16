@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create budget</ion-title>
+    <ion-button (click)="dismissModal()" slot="end" fill="clear">
+      Close
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="budgetForm">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input required type="text" formControlName="budgetName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Amount</ion-label>
+      <ion-input
+        required
+        type="number"
+        formControlName="budgetAmount"
+      ></ion-input>
+    </ion-item>
+    <!-- Add Button function -->
+    <ion-button
+      expand="block"
+      class="ion-margin-top"
+      [disabled]="budgetForm.invalid"
+      (click)="submitBudget()"
+    >
+      Confirm
+    </ion-button>
+  </form>
+</ion-content>
