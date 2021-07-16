@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { BudgetModalComponent } from 'src/app/components/budget-modal/budget-modal.component';
 
 @Component({
   selector: 'app-budget',
@@ -7,9 +8,9 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./budget.page.scss'],
 })
 export class BudgetPage implements OnInit {
-  items: any [] = [];
+  inputBudget: any [] = [];
   
-  constructor(public alert : AlertController) { }
+  constructor(public alert : AlertController, private modalCtrl : ModalController) { }
 
   ngOnInit() {
   }
@@ -22,37 +23,17 @@ export class BudgetPage implements OnInit {
     alert("hey");
   }
 
-  // Alert Dialog
-  add(){
-    this.alert.create({
-      header: "Add",
-      inputs: [
-        {
-          name: 'expensess',
-          type: 'text',
-          placeholder: 'Title'
-        }
-      ],
-      buttons: [
-        {
-            text: 'No',
-            handler: () => {
-              console.log('I care about humanity');
-          }
-        },
-        {
-          text: 'Yes',
-          handler: (alertData) => {
-            this.items.push(alertData.expensess);
-            console.log(this.items);
-          }
-        } 
-      ]
-    }).then(res => {
-      res.present();
+  // Open Modal
+  async openModal(){
+    const modal = await this.modalCtrl.create({
+      component : BudgetModalComponent
     });
-  }
 
+    await modal.present();
+  }
+  // 
+
+  // Alert Dialog
   delete(i){
     this.alert.create({
       header: 'Delete',
@@ -67,7 +48,7 @@ export class BudgetPage implements OnInit {
         {
           text: 'Yes',
           handler: () => {
-            this.items.splice(i, 1);
+            this.inputBudget.splice(i, 1);
           }
         }
     ]
