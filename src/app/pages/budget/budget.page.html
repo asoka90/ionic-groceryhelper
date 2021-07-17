@@ -5,15 +5,25 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <!-- List -->
-  <ng-container *ngFor="let item of inputBudget; let i = index">
+  <ng-container *ngFor="let item of budgetitems;">
     <ion-list>
       <ion-item-sliding>
         <ion-item button (click)="test()">
-          <ion-label>{{item}}</ion-label>
+          <ion-label text-wrap>
+            <h2>{{item.name}}</h2>
+            <ion-text color="secondary">
+              <p>undefined/{{item.amount}}</p>
+            </ion-text>
+          </ion-label>
         </ion-item>
-        <ion-item-options slide="end" (ionSwipe)="delete(i)">
-          <ion-item-option color="danger" (click)="delete(i)" expandable>
+        <ion-item-options slide="end" (ionSwipe)="delete(item)">
+          <ion-item-option color="danger" (click)="delete(item)" expandable>
             <ion-icon name="close"></ion-icon>
           </ion-item-option>
         </ion-item-options>
@@ -22,11 +32,6 @@
   </ng-container>
   <!--  -->
 
-  <div class="fab-container">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="openModal()">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  </div>
+  <!-- <div class="fab-container"> -->
+  <!-- </div> -->
 </ion-content>

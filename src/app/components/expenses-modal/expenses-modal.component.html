@@ -24,12 +24,15 @@
         <ion-select
           required
           value="peperoni"
-          multiple="true"
-          placeholder="Select Pizza"
+          multiple="false"
+          placeholder="Select Budget"
           formControlName="expensesBudget"
         >
-          <ion-select-option value="peperoni">Peperoni</ion-select-option>
-          <ion-select-option value="hawaii">Hawaii</ion-select-option>
+          <ion-select-option
+            *ngFor="let item of items"
+            value="{{ item.name }}"
+            >{{ item.name }}</ion-select-option
+          >
         </ion-select>
       </ion-item>
     </ion-item>
@@ -53,15 +56,10 @@
       <ion-label position="floating">Date</ion-label>
       <ion-datetime
         required
-        displayFormat="MM DD YY"
+        displayFormat="MMMM-D-YYYY"
         placeholder="Select Date"
         formControlName="expensesDate"
       ></ion-datetime>
-    </ion-item>
-    <!-- Receipt -->
-    <ion-item>
-      <ion-label>Receipt</ion-label>
-      <ion-button expand="block" shape="round" slot="end"> Upload </ion-button>
     </ion-item>
 
     <!-- Confirm -->
