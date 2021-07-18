@@ -12,30 +12,23 @@ Chart.register(...registerables);
   templateUrl: './budget.page.html',
   styleUrls: ['./budget.page.scss'],
 })
-export class BudgetPage implements OnInit, OnDestroy {
+export class BudgetPage implements OnInit {
   budgetitems: budgetItem[] = [];
   expensesItems: expensesItem[] = [];
   totalBudget: number = 0;
   totalExpenses: number = 0;
 
-  @ViewChild('mylist')mylist: IonList;
   @ViewChild('circleCanvas') public circleCanvas: ElementRef;
 
   private doughnutChart: Chart;
 
   constructor(public alert : AlertController, private modalCtrl : ModalController, private budgetStorageService : budgetStorageService, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) {
     this.pltform.ready().then(() => {
-      this.loadBudgetItems();
-      this.loadExpensesItems();
+      this.loadItems();
     })
    }
   
-  async ngOnInit() {
-    await this.storage.create();
-  }
-  
-  ionViewWillEnter(){
-    console.log("Entering");
+  ngOnInit() {
   }
 
   ionViewDidEnter(){
@@ -46,16 +39,6 @@ export class BudgetPage implements OnInit, OnDestroy {
   ionViewWillLeave(){
     console.log("Leaving");
     this.doughnutChart.destroy();
-  }
-
-  ionViewDidLeave(){
-    console.log("Leave");
-    // this.doughnutChart.destroy();
-  }
-
-  @HostListener('unloaded')
-  ngOnDestroy(){
-    console.log("desto");
   }
 
   doughnutChartMethod() {
@@ -80,7 +63,7 @@ export class BudgetPage implements OnInit, OnDestroy {
   }
 
   // Read
-  loadBudgetItems(){
+  loadItems(){
     this.budgetStorageService.getBudgetItems().then(items => {
       this.budgetitems = items;
       this.totalBudget = 0;
@@ -89,11 +72,9 @@ export class BudgetPage implements OnInit, OnDestroy {
       }
 
       console.log("Total Budget: " + this.totalBudget);
-        
-      });
-  }
+      
+    });
 
-  loadExpensesItems(){
     this.expensesStorageService.getExpenseItems().then(items => {
       this.expensesItems = items;
       this.totalExpenses = 0;
@@ -102,6 +83,7 @@ export class BudgetPage implements OnInit, OnDestroy {
       }
 
       console.log("Total Expenses: " + this.totalExpenses);
+      
     })
   }
 
@@ -114,10 +96,9 @@ export class BudgetPage implements OnInit, OnDestroy {
   deleteItem( item: budgetItem){
     this.budgetStorageService.deleteBudgetItems(item.id).then(item => {
       this.showToast('Item Removed!');
-      // this.mylist.closeSlidingItems();
-      this.loadBudgetItems();
-      this.loadExpensesItems();
+      this.loadItems();
     })
+    
   }
 
   // Toast
@@ -130,10 +111,11 @@ export class BudgetPage implements OnInit, OnDestroy {
   }
 
   reload(){
-    this.loadBudgetItems();
-    this.loadExpensesItems();
     this.doughnutChart.destroy();
-    this.doughnutChartMethod();
+    setTimeout(() => {
+      this.doughnutChartMethod();
+    }, 250);
+    
   }
 
   // Open Modal
@@ -142,12 +124,12 @@ export class BudgetPage implements OnInit, OnDestroy {
       component : BudgetModalComponent
     });
     
-    await modal.present();
-
     modal.onDidDismiss().then(()=>{
-      this.loadBudgetItems();
-      this.loadExpensesItems();
+      this.loadItems();
+      this.reload();
     });
+
+    return await modal.present();
   }
   // 
 
@@ -167,6 +149,7 @@ export class BudgetPage implements OnInit, OnDestroy {
           text: 'Yes',
           handler: () => {
             this.deleteItem(i);
+            this.reload();
           }
         }
     ]
