@@ -3,6 +3,7 @@ import { AlertController, IonList, ModalController, Platform, ToastController } 
 import { ExpensesModalComponent } from 'src/app/components/expenses-modal/expenses-modal.component';
 import { expensesItem, ExpensesStorageService } from 'src/app/services/expenses-storage.service';
 import { Storage } from '@ionic/storage';
+import { ExpensesUpdateModalComponent } from 'src/app/components/expenses-update-modal/expenses-update-modal.component';
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.page.html',
@@ -48,10 +49,6 @@ export class ExpensesPage implements OnInit {
     toast.present();
   }
 
-  test(){
-    alert("Hey");
-  }
-
   // Open Modal
   async openModal(){
     const modal = await this.modalCtrl.create({
@@ -64,7 +61,26 @@ export class ExpensesPage implements OnInit {
       this.loadItems();
     });
   }
-  // 
+  
+  // Update
+  async openUpdateModal(i){
+    let modal = await this.modalCtrl.create({
+      component : ExpensesUpdateModalComponent,
+      componentProps: {
+        'expensesID': i.id,
+        'expensesName': i.name,
+        'expensesAmount': i.amount,
+        'expensesNote': i.note,
+        'expensesDate': i.date
+      }
+    });
+    
+    modal.onDidDismiss().then(()=>{
+      this.loadItems();
+    });
+
+    return await modal.present();
+  }
 
   // Alert Dialog
   delete(i){

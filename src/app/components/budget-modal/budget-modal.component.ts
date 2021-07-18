@@ -19,8 +19,7 @@ export class BudgetModalComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
-    await this.storage.create();
+  ngOnInit() {
   }
 
   dismissModal(){
