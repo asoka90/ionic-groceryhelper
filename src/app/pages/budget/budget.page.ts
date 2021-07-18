@@ -5,6 +5,7 @@ import { budgetItem, budgetStorageService } from 'src/app/services/budgetStorage
 import { Storage } from '@ionic/storage';
 import { expensesItem, ExpensesStorageService } from 'src/app/services/expenses-storage.service';
 import { Chart, registerables } from 'chart.js';
+import { BudgetUpdateModalComponent } from 'src/app/components/budget-update-modal/budget-update-modal.component';
 Chart.register(...registerables);
 
 @Component({
@@ -35,7 +36,7 @@ export class BudgetPage implements OnInit {
     console.log("Entered");
     setTimeout(() => {
       this.doughnutChartMethod();
-    }, 250)
+    }, 100)
     
   }
 
@@ -90,11 +91,6 @@ export class BudgetPage implements OnInit {
     })
   }
 
-  // Update
-  updateBudget(){
-    
-  }
-
   //  Delete
   deleteItem( item: budgetItem){
     this.budgetStorageService.deleteBudgetItems(item.id).then(item => {
@@ -117,7 +113,7 @@ export class BudgetPage implements OnInit {
     this.doughnutChart.destroy();
     setTimeout(() => {
       this.doughnutChartMethod();
-    }, 250);
+    }, 100);
     
   }
 
@@ -134,7 +130,25 @@ export class BudgetPage implements OnInit {
 
     return await modal.present();
   }
-  // 
+  
+  // Update
+  async openUpdateModal(i){
+    let modal = await this.modalCtrl.create({
+      component : BudgetUpdateModalComponent,
+      componentProps: {
+        'budgetID': i.id,
+        'budgetName': i.name,
+        'budgetAmount': i.amount
+      }
+    });
+    
+    modal.onDidDismiss().then(()=>{
+      this.loadItems();
+      this.reload();
+    });
+
+    return await modal.present();
+  }
 
   // Alert Dialog
   delete(i){

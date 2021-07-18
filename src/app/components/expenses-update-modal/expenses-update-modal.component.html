@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Update expense</ion-title>
+    <ion-button (click)="dismissModal()" slot="end" fill="clear">
+      Close
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="expenseUpdateForm">
+    <ng-container *ngFor="let item of expensesItem">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input
+          required
+          type="text"
+          formControlName="expensesName"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Amount</ion-label>
+        <ion-input
+          required
+          type="number"
+          formControlName="expensesAmount"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Note</ion-label>
+        <ion-input
+          required
+          type="text"
+          formControlName="expensesNote"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Date</ion-label>
+        <ion-datetime
+          required
+          displayFormat="MMMM-D-YYYY"
+          placeholder="Select Date"
+          formControlName="expensesDate"
+        ></ion-datetime>
+      </ion-item>
+
+      <!-- Confirm -->
+      <ion-button
+        expand="block"
+        class="ion-margin-top"
+        [disabled]="expenseUpdateForm.invalid"
+        (click)="submitUpdateExpenses(item)"
+      >
+        Confirm
+      </ion-button>
+    </ng-container>
+  </form>
+</ion-content>

@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 export interface expensesItem{
   id: number,
   name: string,
-  budget: string,
   amount: number,
   note: string,
   date: string
@@ -17,7 +16,9 @@ const ITEMS_KEY = 'my-items-expenses';
 })
 export class ExpensesStorageService {
 
-  constructor(private storage : Storage) { }
+  constructor(private storage : Storage) { 
+    this.init();
+  }
 
   // Create
   addExpenseItems(item: expensesItem): Promise<any>{
@@ -74,5 +75,9 @@ export class ExpensesStorageService {
 
       return this.storage.set(ITEMS_KEY, toKeep);
     });
+  }
+
+  async init(){
+    await this.storage.create();
   }
 }
