@@ -24,13 +24,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/notes/notes.module').then( m => m.NotesPageModule)
   },
   {
+    path: 'notes/:id',
+    loadChildren: () => import('./pages/notedetail/notedetail.module').then(m => m.NotedetailPageModule)
+  },
+  {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  }
-
-
-
-
+  },
 ];
 
 @NgModule({
