@@ -33,7 +33,10 @@ export class BudgetPage implements OnInit {
 
   ionViewDidEnter(){
     console.log("Entered");
-    this.doughnutChartMethod();
+    setTimeout(() => {
+      this.doughnutChartMethod();
+    }, 250)
+    
   }
 
   ionViewWillLeave(){
@@ -89,7 +92,7 @@ export class BudgetPage implements OnInit {
 
   // Update
   updateBudget(){
-
+    
   }
 
   //  Delete
