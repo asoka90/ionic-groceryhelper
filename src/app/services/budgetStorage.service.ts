@@ -14,7 +14,9 @@ const ITEMS_KEY = 'my-items-budget';
 })
 export class budgetStorageService {
 
-  constructor(private storage : Storage) { }
+  constructor(private storage : Storage) { 
+    this.init();
+  }
 
   // Create
   addBudgetItems(item: budgetItem): Promise<any>{
@@ -71,5 +73,9 @@ export class budgetStorageService {
 
       return this.storage.set(ITEMS_KEY, toKeep);
     });
+  }
+
+  async init(){
+    await this.storage.create();
   }
 }
