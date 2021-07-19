@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, Platform, ToastController } from '@ionic/angular';
-import { budgetItem, budgetStorageService } from 'src/app/services/budgetStorage.service';
 import { Storage } from '@ionic/storage';
 import { expensesItem, ExpensesStorageService } from 'src/app/services/expenses-storage.service';
 @Component({
@@ -10,20 +9,14 @@ import { expensesItem, ExpensesStorageService } from 'src/app/services/expenses-
   styleUrls: ['./expenses-modal.component.scss'],
 })
 export class ExpensesModalComponent implements OnInit {
-  items: budgetItem[] = [];
 
   newItem: expensesItem = <expensesItem>{};
 
   public expensesForm : FormGroup;
 
-  constructor(private modalCtrl : ModalController, private formBuilder : FormBuilder, private budgetstorageService : budgetStorageService, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) { 
-    this.pltform.ready().then(() => {
-      this.loadItems();
-    })
-
+  constructor(private modalCtrl : ModalController, private formBuilder : FormBuilder, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) { 
     this.expensesForm = formBuilder.group({
       expensesName: ['', Validators.required],
-      expensesBudget: ['', Validators.required],
       expensesAmount: ['', Validators.required],
       expensesNote: ['', Validators.required],
       expensesDate: ['', Validators.required]
@@ -31,15 +24,7 @@ export class ExpensesModalComponent implements OnInit {
 
   }
 
-  async ngOnInit() {
-    await this.storage.create();
-  }
-
-  // Read
-  loadItems(){
-    this.budgetstorageService.getBudgetItems().then(items => {
-      this.items = items;
-    })
+  ngOnInit() {
   }
 
   dismissModal(){
@@ -71,7 +56,6 @@ export class ExpensesModalComponent implements OnInit {
   submitExpenses(){
     this.newItem.id = Date.now();
     this.newItem.name = this.name;
-    this.newItem.budget = this.budget;
     this.newItem.amount = this.amount;
     this.newItem.note = this.note;
     this.newItem.date = this.date;

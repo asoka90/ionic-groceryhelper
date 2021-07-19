@@ -18,25 +18,6 @@
       ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Budget</ion-label>
-      <ion-item>
-        <!-- Change later -->
-        <ion-select
-          required
-          value="peperoni"
-          multiple="false"
-          placeholder="Select Budget"
-          formControlName="expensesBudget"
-        >
-          <ion-select-option
-            *ngFor="let item of items"
-            value="{{ item.name }}"
-            >{{ item.name }}</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
-    </ion-item>
-    <ion-item>
       <ion-label position="floating">Amount</ion-label>
       <ion-input
         required
