@@ -4,15 +4,15 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="custom"></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot = "end">
-      <ion-buttons (click) = "addNote()">
-        <ion-icon slots="icon-only" name="clipboard"></ion-icon>
-      </ion-buttons>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click) ="addNote()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-list>
     <ion-item button detail *ngFor="let note of notesService.notes" [routerLink]="'/notes/' + note.id" routerDirection="forward">
       <ion-label>{{ note.title }}</ion-label>
