@@ -30,20 +30,19 @@ const routes: Routes = [
   {
     path: 'add-new-task',
     loadChildren: () => import('./pages/add-new-item/add-new-task.module').then( m => m.AddNewTaskPageModule)
-  },  {
+  },
+  {
     path: 'update-list',
     loadChildren: () => import('./pages/update-list/update-list.module').then( m => m.UpdateListPageModule)
   },
-
-
-
-
-
-
-
-
-
-
+  {
+    path: 'notes/:id',
+    loadChildren: () => import('./pages/notedetail/notedetail.module').then(m => m.NotedetailPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
 ];
 
 @NgModule({

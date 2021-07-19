@@ -1,28 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
-
+import { ModalController, Platform, ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { expensesItem, ExpensesStorageService } from 'src/app/services/expenses-storage.service';
 @Component({
   selector: 'app-expenses-modal',
   templateUrl: './expenses-modal.component.html',
   styleUrls: ['./expenses-modal.component.scss'],
 })
 export class ExpensesModalComponent implements OnInit {
-  public expensesForm : FormGroup;
-  constructor(private modalCtrl : ModalController, private formBuilder : FormBuilder) { 
 
+  newItem: expensesItem = <expensesItem>{};
+
+  public expensesForm : FormGroup;
+
+  constructor(private modalCtrl : ModalController, private formBuilder : FormBuilder, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) { 
     this.expensesForm = formBuilder.group({
       expensesName: ['', Validators.required],
-      expensesBudget: ['', Validators.required],
       expensesAmount: ['', Validators.required],
       expensesNote: ['', Validators.required],
       expensesDate: ['', Validators.required]
-      // Add Receipt
     });
 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   dismissModal(){
     this.modalCtrl.dismiss();
@@ -51,6 +54,24 @@ export class ExpensesModalComponent implements OnInit {
 
   // Submit Expenses
   submitExpenses(){
-    console.log(this.name + "\n" + this.budget + "\n" + this.amount + "\n" + this.note + "\n" + this.date);
+    this.newItem.id = Date.now();
+    this.newItem.name = this.name;
+    this.newItem.amount = this.amount;
+    this.newItem.note = this.note;
+    this.newItem.date = this.date;
+    this.expensesStorageService.addExpenseItems(this.newItem).then(item => {
+      this.newItem = <expensesItem>{};
+      this.showToast('Item added');
+    })
+    this.dismissModal();
+  }
+
+  // Toast
+  async showToast(msg){
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 }
