@@ -1,5 +1,5 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonList, ModalController, Platform, ToastController } from '@ionic/angular';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AlertController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { BudgetModalComponent } from 'src/app/components/budget-modal/budget-modal.component';
 import { budgetItem, budgetStorageService } from 'src/app/services/budgetStorage.service';
 import { Storage } from '@ionic/storage';
@@ -23,13 +23,9 @@ export class BudgetPage implements OnInit {
 
   private doughnutChart: Chart;
 
-  constructor(public alert : AlertController, private modalCtrl : ModalController, private budgetStorageService : budgetStorageService, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) {
-    // this.pltform.ready().then(() => {
-    //   this.loadItems();
-    // })
-   }
+  constructor(public alert : AlertController, private modalCtrl : ModalController, private budgetStorageService : budgetStorageService, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) {}
   
-  ngOnInit() {
+  ngOnInit(){
   }
 
   ionViewDidEnter(){
