@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AddNewTaskPage as AddNewItemPage } from 'src/app/pages/add-new-item/add-new-task.page';
+import { AddNewTaskPage as AddNewItemPage } from '../add-new-item/add-new-task.page';
 import { checklistItem, ChecklistService } from 'src/app/services/checklist.service';
 import { UpdateListPage } from '../update-list/update-list.page';
 // import { Storage } from '@ionic/storage';
@@ -52,7 +52,12 @@ checkList: checklistItem[] = [];
   async update(selectedItem){
     const modal = await this.modalCtrl.create({
       component: UpdateListPage,
-      componentProps: {item: selectedItem}
+      componentProps: {
+        item: selectedItem,
+        'itemName': selectedItem.name,
+        'itemPriority': selectedItem.priority,
+        'itemCategory': selectedItem.category
+      }
     })
     
     modal.onDidDismiss().then(()=>{

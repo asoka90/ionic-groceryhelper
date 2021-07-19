@@ -2,24 +2,20 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { checklistItem, ChecklistService } from 'src/app/services/checklist.service';
 
-export interface Item{
-  name: string,
-  priority: string,
-  category: string
-}
-
 @Component({
   selector: 'app-update-list',
   templateUrl: './update-list.page.html',
   styleUrls: ['./update-list.page.scss'],
 })
 export class UpdateListPage implements OnInit {
-  @Input() itemName: string;
-  @Input() itemPriority: string;
+  @Input() item;
   categories =[]
   categorySelectedCategory
   
   newItemObj: any[] = [];
+  @Input() itemName: string;
+  @Input() itemPriority: string;
+  @Input() itemCategory: string;
 
   constructor(public modalCtlr:ModalController, public checklistService:ChecklistService) { }
 
@@ -46,6 +42,7 @@ export class UpdateListPage implements OnInit {
       item.priority = this.itemPriority;
       item.category = this.categorySelectedCategory;
 
+      
       this.checklistService.updateItems(item).then(() => {
         // this.showToast('Item Updated');
       })
