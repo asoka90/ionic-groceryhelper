@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add New Item</ion-title>
+    <ion-icon
+      name="close"
+      slot="end"
+      size="large"
+      class="ion-padding"
+      (click)="dismis()"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-textarea
+        [(ngModel)]="itemName"
+        placeholder="Write your item here"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Priority</ion-label>
+      <ion-select [(ngModel)]="itemPriority">
+        <ion-select-option value="low">Low</ion-select-option>
+        <ion-select-option value="middle">Middle</ion-select-option>
+        <ion-select-option value="high">High</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="pricetag-outline" slot="start"></ion-icon>
+      <ion-label>Category</ion-label>
+      <span>{{categorySelectedCategory}}</span>
+    </ion-item>
+
+    <ion-chip
+      *ngFor="let tag of categories; let i = index"
+      color="secondary"
+      outline="true"
+      (click)="selectCategory(i)"
+    >
+      <ion-label color="secondary">{{tag}}</ion-label>
+    </ion-chip>
+
+    <ion-button class="ion-margin" expand="block" (click)="update(item)"
+      >Update Item</ion-button
+    >
+  </ion-card>
+</ion-content>
