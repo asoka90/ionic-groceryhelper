@@ -24,9 +24,9 @@ export class BudgetPage implements OnInit {
   private doughnutChart: Chart;
 
   constructor(public alert : AlertController, private modalCtrl : ModalController, private budgetStorageService : budgetStorageService, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) {
-    this.pltform.ready().then(() => {
-      this.loadItems();
-    })
+    // this.pltform.ready().then(() => {
+    //   this.loadItems();
+    // })
    }
   
   ngOnInit() {
