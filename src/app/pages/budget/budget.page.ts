@@ -1,5 +1,5 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonList, ModalController, Platform, ToastController } from '@ionic/angular';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AlertController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { BudgetModalComponent } from 'src/app/components/budget-modal/budget-modal.component';
 import { budgetItem, budgetStorageService } from 'src/app/services/budgetStorage.service';
 import { Storage } from '@ionic/storage';
@@ -19,21 +19,23 @@ export class BudgetPage implements OnInit {
   totalBudget: number = 0;
   totalExpenses: number = 0;
 
+  fabHide;
+  oldScrollTop: number = 0;
+
   @ViewChild('circleCanvas') public circleCanvas: ElementRef;
 
   private doughnutChart: Chart;
 
-  constructor(public alert : AlertController, private modalCtrl : ModalController, private budgetStorageService : budgetStorageService, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) {
-    this.pltform.ready().then(() => {
-      this.loadItems();
-    })
-   }
+  constructor(private render : Renderer2, private element : ElementRef, public alert : AlertController, private modalCtrl : ModalController, private budgetStorageService : budgetStorageService, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) {}
   
-  ngOnInit() {
+  ngOnInit(){
+    this.fabHide = document.getElementById("fab");
+    this.render.setStyle(this.fabHide, "webkitTransition", "transform 500ms, opacity 500ms");
   }
 
   ionViewDidEnter(){
     console.log("Entered");
+    this.loadItems();
     setTimeout(() => {
       this.doughnutChartMethod();
     }, 100)
@@ -87,8 +89,14 @@ export class BudgetPage implements OnInit {
       }
 
       console.log("Total Expenses: " + this.totalExpenses);
-      
+      if(this.totalExpenses > this.totalBudget){
+        this.alertBudget();
+      } else{
+        console.log("Everything is under Budget");
+      }
     })
+
+    
   }
 
   //  Delete
@@ -110,6 +118,7 @@ export class BudgetPage implements OnInit {
   }
 
   reload(){
+    this.loadItems();
     this.doughnutChart.destroy();
     setTimeout(() => {
       this.doughnutChartMethod();
@@ -124,7 +133,6 @@ export class BudgetPage implements OnInit {
     });
     
     modal.onDidDismiss().then(()=>{
-      this.loadItems();
       this.reload();
     });
 
@@ -143,7 +151,6 @@ export class BudgetPage implements OnInit {
     });
     
     modal.onDidDismiss().then(()=>{
-      this.loadItems();
       this.reload();
     });
 
@@ -187,5 +194,17 @@ export class BudgetPage implements OnInit {
     }).then(res => {
       res.present();
     });
+  }
+
+  onScroll(event){
+    if (event.detail.deltaY > 200) {
+      console.log('UP');
+      this.render.setStyle(this.fabHide, "opacity", "0");
+      this.render.setStyle(this.fabHide, "webkitTransform", "scale3d(.1,.1,.1)");
+    } else if (event.detail.deltaY < 0) {
+      console.log('DOWN');
+      this.render.setStyle(this.fabHide, "opacity", "1");
+      this.render.setStyle(this.fabHide, "webkitTransform", "scale3d(1,1,1)");
+    }
   }
 }
