@@ -8,31 +8,31 @@
 <ion-content>
 
   <ion-card>
-    <ion-item>
+    <ion-item class="ion-align-self-center">
       <ion-textarea [(ngModel)]="itemName" placeholder="Write your item here"></ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-label>Priority</ion-label>
       <ion-select [(ngModel)]="itemPriority">
-        <ion-select-option value="Low">Low</ion-select-option>
-        <ion-select-option value="Middle">Middle</ion-select-option>
-        <ion-select-option value="High">High</ion-select-option>
+        <ion-select-option value="low">Low</ion-select-option>
+        <ion-select-option value="middle">Middle</ion-select-option>
+        <ion-select-option value="high">High</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-icon name="pricetag-outline" slot="start"></ion-icon>
       <ion-label>Category</ion-label>
-      <span>{{itemCategory}}</span>
+      <span>{{categorySelectedCategory}}</span>
     </ion-item>
 
     <ion-item>
-      <ion-chip *ngFor="let category of categories; let i = index" (click)="selectedCategory(i)">
-        <ion-label>{{category}}</ion-label>
+      <ion-chip *ngFor="let tag of categories; let i = index" color="secondary" outline="true" (click)="selectCategory(i)">
+        <ion-label color="secondary">{{tag}}</ion-label>
       </ion-chip>
     </ion-item>
 
-    <ion-button class="ion-margin" expand="block" (click)="AddItem()">Add Item</ion-button>
+    <ion-button class="ion-margin" expand="block" (click)="add()">Add Item</ion-button>
   </ion-card>
 </ion-content>
