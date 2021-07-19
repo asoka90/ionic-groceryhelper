@@ -1,15 +1,23 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Add New Item</ion-title>
-    <ion-icon name="close" slot= "end" size="large" class="ion-padding" (click)="dismis()"></ion-icon>
+    <ion-icon
+      name="close"
+      slot="end"
+      size="large"
+      class="ion-padding"
+      (click)="dismis()"
+    ></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <ion-card>
     <ion-item>
-      <ion-textarea [(ngModel)]="itemName" placeholder="Write your item here"></ion-textarea>
+      <ion-textarea
+        [(ngModel)]="itemName"
+        placeholder="Write your item here"
+      ></ion-textarea>
     </ion-item>
 
     <ion-item>
@@ -28,11 +36,18 @@
     </ion-item>
 
     <ion-item>
-      <ion-chip *ngFor="let tag of categories; let i = index" color="secondary" outline="true" (click)="selectCategory(i)">
+      <ion-chip
+        *ngFor="let tag of categories; let i = index"
+        color="secondary"
+        outline="true"
+        (click)="selectCategory(i)"
+      >
         <ion-label color="secondary">{{tag}}</ion-label>
       </ion-chip>
     </ion-item>
 
-    <ion-button class="ion-margin" expand="block" (click)="update()">Update Item</ion-button>
+    <ion-button class="ion-margin" expand="block" (click)="update(item)"
+      >Update Item</ion-button
+    >
   </ion-card>
 </ion-content>

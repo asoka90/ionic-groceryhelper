@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
+const KEY = 'checklist'
+export interface checklistItem{
+  id: number,
+  name: string,
+  priority: string,
+  category: string
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -10,26 +17,57 @@ export class ChecklistService {
     this.init()
    }
 
-  addItem(key, value){
-    this.storage.set(key, value)
+   addItems(item: checklistItem): Promise<any>{
+    return this.storage.get(KEY).then((items: checklistItem[]) => {
+      if (items){
+        items.push(item);
+        return this.storage.set(KEY, items);
+      } else{
+        return this.storage.set(KEY, [item]);
+      }
+    });
   }
 
-  deleteItem(key){
-    this.storage.remove(key)
+  deleteItem(id: number): Promise<checklistItem>{
+    return this.storage.get(KEY).then((items: checklistItem[]) => {
+      if (!items || items.length === 0){
+        return null;
+      }
+
+      let toKeep: checklistItem[] = [];
+
+      for(let i of items){
+        if (i.id !== id){
+          toKeep.push(i);
+        }
+      }
+
+      return this.storage.set(KEY, toKeep);
+    });
   }
 
-  updateItem(key, newValue){
-    this.storage.set(key, newValue)
-    this.getAllItems()
+  updateItems(item: checklistItem): Promise<any>{
+    return this.storage.get(KEY).then((items: checklistItem[]) => {
+      if (!items || items.length === 0){
+        return null;
+      }
+
+      let newItems: checklistItem[] = [];
+
+      for (let i of items){
+        if (i.id === item.id){
+          newItems.push(item);
+        } else{
+          newItems.push(i);
+        }
+      }
+
+      return this.storage.set(KEY, newItems);
+    });
   }
 
-  getAllItems(){
-    let items: any = []
-    this.storage.forEach((key, value, index) => {
-    items.push({'key':value, 'value':key})
-
-  });
-  return items
+  getAllItems(): Promise<checklistItem[]>{
+    return this.storage.get(KEY);
   }
 
   async init(){

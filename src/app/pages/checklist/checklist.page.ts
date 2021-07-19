@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AddNewTaskPage as AddNewItemPage } from 'src/app/pages/add-new-item/add-new-task.page';
-import { ChecklistService } from 'src/app/services/checklist.service';
+import { checklistItem, ChecklistService } from 'src/app/services/checklist.service';
 import { UpdateListPage } from '../update-list/update-list.page';
+// import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-checklist',
@@ -10,14 +11,17 @@ import { UpdateListPage } from '../update-list/update-list.page';
   styleUrls: ['./checklist.page.scss'],
 })
 export class ChecklistPage implements OnInit {
-
-checkList = []
+checkList: checklistItem[] = [];
 
   today : number = Date.now()
 
   constructor(public modalCtrl:ModalController, public checklistService:ChecklistService) {
-    this.getAllItem()
+    this.getAllItem();
+    
    }
+
+   ngOnInit() {
+  }
 
   async addItem(){
     const modal = await this.modalCtrl.create({
@@ -30,14 +34,19 @@ checkList = []
   }
 
   getAllItem(){
-    this.checkList = this.checklistService.getAllItems()
-    console.log(this.checklistService.getAllItems());
+    this.checklistService.getAllItems().then(items => {
+      this.checkList = items;
+    });
 
+    console.log(this.checkList);
   }
 
-  delete(key){
-    this.checklistService.deleteItem(key)
-    this.getAllItem()
+  delete(item){
+    this.checklistService.deleteItem(item.id).then(item => {
+      // this.showToast('Item Removed!');
+      this.getAllItem();
+    })
+    
   }
 
   async update(selectedItem){
@@ -53,6 +62,5 @@ checkList = []
     return await modal.present()
   }
 
-  ngOnInit() {
-  }
+  
 }

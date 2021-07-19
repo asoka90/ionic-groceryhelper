@@ -1,6 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ChecklistService } from 'src/app/services/checklist.service';
+import { checklistItem, ChecklistService } from 'src/app/services/checklist.service';
+
+export interface Item{
+  name: string,
+  priority: string,
+  category: string
+}
 
 @Component({
   selector: 'app-update-list',
@@ -8,14 +14,12 @@ import { ChecklistService } from 'src/app/services/checklist.service';
   styleUrls: ['./update-list.page.scss'],
 })
 export class UpdateListPage implements OnInit {
-  @Input() item;
+  @Input() itemName: string;
+  @Input() itemPriority: string;
   categories =[]
   categorySelectedCategory
   
-  newItemObj = {}
-  itemName
-  itemPriority
-  itemCategory
+  newItemObj: any[] = [];
 
   constructor(public modalCtlr:ModalController, public checklistService:ChecklistService) { }
 
@@ -26,10 +30,6 @@ export class UpdateListPage implements OnInit {
     this.categories.push('Food')
     this.categories.push('Hygiene')
     this.categories.push('Pharmaceutical')
-
-    this.itemName = this.item.value.itemName
-    this.itemPriority = this.item.value.itemPriority
-    this.categorySelectedCategory = this.item.value.itemCategory
   }
 
   selectCategory(index){
@@ -41,12 +41,14 @@ export class UpdateListPage implements OnInit {
     await this.modalCtlr.dismiss()
   }
 
-  async update(){
-    this.newItemObj = ({itemName:this.itemName, 
-      itemPriority:this.itemPriority, 
-      itemCategory:this.categorySelectedCategory})
-      let uid = this.item.key
-      await this.checklistService.updateItem(uid,this.newItemObj)
-      this.dismis()
+  update(item: checklistItem){
+      item.name = this.itemName;
+      item.priority = this.itemPriority;
+      item.category = this.categorySelectedCategory;
+
+      this.checklistService.updateItems(item).then(() => {
+        // this.showToast('Item Updated');
+      })
+      this.dismis();
   }
 }
