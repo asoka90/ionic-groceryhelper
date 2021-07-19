@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AlertController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { BudgetModalComponent } from 'src/app/components/budget-modal/budget-modal.component';
 import { budgetItem, budgetStorageService } from 'src/app/services/budgetStorage.service';
@@ -19,13 +19,18 @@ export class BudgetPage implements OnInit {
   totalBudget: number = 0;
   totalExpenses: number = 0;
 
+  fabHide;
+  oldScrollTop: number = 0;
+
   @ViewChild('circleCanvas') public circleCanvas: ElementRef;
 
   private doughnutChart: Chart;
 
-  constructor(public alert : AlertController, private modalCtrl : ModalController, private budgetStorageService : budgetStorageService, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) {}
+  constructor(private render : Renderer2, private element : ElementRef, public alert : AlertController, private modalCtrl : ModalController, private budgetStorageService : budgetStorageService, private expensesStorageService : ExpensesStorageService, private pltform : Platform, private toast : ToastController, private storage : Storage) {}
   
   ngOnInit(){
+    this.fabHide = document.getElementById("fab");
+    this.render.setStyle(this.fabHide, "webkitTransition", "transform 500ms, opacity 500ms");
   }
 
   ionViewDidEnter(){
@@ -189,5 +194,17 @@ export class BudgetPage implements OnInit {
     }).then(res => {
       res.present();
     });
+  }
+
+  onScroll(event){
+    if (event.detail.deltaY > 200) {
+      console.log('UP');
+      this.render.setStyle(this.fabHide, "opacity", "0");
+      this.render.setStyle(this.fabHide, "webkitTransform", "scale3d(.1,.1,.1)");
+    } else if (event.detail.deltaY < 0) {
+      console.log('DOWN');
+      this.render.setStyle(this.fabHide, "opacity", "1");
+      this.render.setStyle(this.fabHide, "webkitTransform", "scale3d(1,1,1)");
+    }
   }
 }

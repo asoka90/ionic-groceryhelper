@@ -4,8 +4,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content mode="ios">
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" #fab>
+<ion-content mode="ios" scrollEvents="true" (ionScroll)="onScroll($event)">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="fab">
     <ion-fab-button (click)="openModal()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
