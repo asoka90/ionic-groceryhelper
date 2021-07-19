@@ -34,6 +34,7 @@ export class BudgetPage implements OnInit {
 
   ionViewDidEnter(){
     console.log("Entered");
+    this.loadItems();
     setTimeout(() => {
       this.doughnutChartMethod();
     }, 100)
@@ -110,6 +111,7 @@ export class BudgetPage implements OnInit {
   }
 
   reload(){
+    this.loadItems();
     this.doughnutChart.destroy();
     setTimeout(() => {
       this.doughnutChartMethod();
