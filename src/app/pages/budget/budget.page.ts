@@ -88,8 +88,14 @@ export class BudgetPage implements OnInit {
       }
 
       console.log("Total Expenses: " + this.totalExpenses);
-      
+      if(this.totalExpenses > this.totalBudget){
+        this.alertBudget();
+      } else{
+        console.log("Everything is under Budget");
+      }
     })
+
+    
   }
 
   //  Delete
@@ -126,7 +132,6 @@ export class BudgetPage implements OnInit {
     });
     
     modal.onDidDismiss().then(()=>{
-      this.loadItems();
       this.reload();
     });
 
@@ -145,7 +150,6 @@ export class BudgetPage implements OnInit {
     });
     
     modal.onDidDismiss().then(()=>{
-      this.loadItems();
       this.reload();
     });
 
