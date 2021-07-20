@@ -13,7 +13,7 @@ export class NotesService{
     public loaded: boolean = false;
 
     constructor(private storage: Storage){
-
+        this.init()
     }
     
     load(): Promise<boolean>{
@@ -64,6 +64,10 @@ export class NotesService{
             this.notes.splice(index, 1);
             this.save();
         }
+    }
+
+    async init(){
+        await this.storage.create()
     }
 } 
 
