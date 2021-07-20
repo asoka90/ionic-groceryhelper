@@ -12,6 +12,8 @@ import { UpdateListPage } from '../update-list/update-list.page';
 export class ChecklistPage implements OnInit {
   checkList: checklistItem[] = [];
 
+  today = Date.now();
+
   constructor(public modalCtrl:ModalController, public checklistService:ChecklistService, private toast : ToastController) {
     this.getAllItem();
    }
