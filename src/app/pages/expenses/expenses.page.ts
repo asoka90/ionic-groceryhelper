@@ -20,9 +20,7 @@ export class ExpensesPage implements OnInit {
     })
   }
 
-  async ngOnInit() {
-    await this.storage.create();
-  }
+  ngOnInit() {}
 
   // Read
   loadItems(){
@@ -35,18 +33,8 @@ export class ExpensesPage implements OnInit {
   deleteItem( item: expensesItem){
     this.storageService.deleteExpenseItems(item.id).then(item => {
       this.showToast('Item Removed!');
-      // this.mylist.closeSlidingItems();
       this.loadItems();
     })
-  }
-
-  // Toast
-  async showToast(msg){
-    const toast = await this.toast.create({
-      message: msg,
-      duration: 2000
-    });
-    toast.present();
   }
 
   // Open Modal
@@ -105,4 +93,14 @@ export class ExpensesPage implements OnInit {
       res.present();
     });
   }
+
+  // Toast
+  async showToast(msg){
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
 }
