@@ -15,6 +15,7 @@ export class NotesPage implements OnInit {
    }
 
   ngOnInit() {
+    this.notesService.load();
   }
 
   addNote(){
