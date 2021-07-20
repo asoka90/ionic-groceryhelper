@@ -1,11 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none">
-      <ion-label style="font-weight: 700; font-size: 3ex">
-        Checklist
-        <p style="font-weight: 400">{{today | date:'fullDate'}}</p>
-      </ion-label>
-    </ion-item>
+    <ion-title>Checklist</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="custom"></ion-menu-button>
     </ion-buttons>
@@ -42,7 +37,7 @@
         name="ellipse"
       ></ion-icon>
 
-      <ion-label>{{item.name}}</ion-label>
+      <ion-label style="font-size: 18px;">{{item.name}}</ion-label>
     </ion-item>
 
     <ion-row>

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Add New Item</ion-title>
-    <ion-icon
+    <ion-icon id="close" style="color: white"
       name="close"
       slot="end"
       size="large"
@@ -34,16 +34,18 @@
       <ion-label>Category</ion-label>
       <span>{{categorySelectedCategory}}</span>
     </ion-item>
-
-    <ion-chip
-      *ngFor="let tag of categories; let i = index"
-      color="secondary"
-      outline="true"
-      (click)="selectCategory(i)"
-    >
-      <ion-label color="secondary">{{tag}}</ion-label>
-    </ion-chip>
-
+    
+    <br>
+    <div class='borderchip'>
+      <ion-chip
+        *ngFor="let tag of categories; let i = index"
+        color="secondary"
+        outline="true"
+        (click)="selectCategory(i)"
+      >
+        <ion-label color="secondary">{{tag}}</ion-label>
+      </ion-chip>
+    </div>
     <ion-button class="ion-margin" expand="block" (click)="add()"
       >Add Item</ion-button
     >
