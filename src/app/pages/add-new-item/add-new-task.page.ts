@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { checklistItem, ChecklistService } from '../../services/checklist.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class AddNewTaskPage implements OnInit {
   itemPriority
   itemCategory
 
-  constructor(public modalCtrl:ModalController, public checklistService:ChecklistService) { }
+  constructor(public modalCtrl:ModalController, public checklistService:ChecklistService, private toast : ToastController) { }
 
   ngOnInit() {
     this.categories.push('Alcoholic Beverages')
@@ -36,10 +36,10 @@ export class AddNewTaskPage implements OnInit {
     this.newItemObj.category = this.categorySelectedCategory;
     this.checklistService.addItems(this.newItemObj).then(item => {
       this.newItemObj = <checklistItem>{};
-      // this.showToast('Item added');
+      this.showToast('To-do list added!');
     })
 
-    this.dismis()
+    this.dismiss();
   }
 
   selectCategory(index){
@@ -47,7 +47,16 @@ export class AddNewTaskPage implements OnInit {
     console.log("Category",this.categorySelectedCategory);
   }
 
-  async dismis(){
+  async dismiss(){
     await this.modalCtrl.dismiss(this.newItemObj)
-}
+  }
+
+   // Toast
+   async showToast(msg){
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
 }

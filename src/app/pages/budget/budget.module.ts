@@ -9,6 +9,7 @@ import { BudgetPageRoutingModule } from './budget-routing.module';
 import { BudgetPage } from './budget.page';
 import { BudgetModalComponent } from 'src/app/components/budget-modal/budget-modal.component';
 import { BudgetUpdateModalComponent } from 'src/app/components/budget-update-modal/budget-update-modal.component';
+import { GlobaldirModule } from 'src/app/modules/globaldir/globaldir.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { BudgetUpdateModalComponent } from 'src/app/components/budget-update-mod
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    GlobaldirModule,
     BudgetPageRoutingModule
   ],
   declarations: [BudgetPage, BudgetModalComponent, BudgetUpdateModalComponent],

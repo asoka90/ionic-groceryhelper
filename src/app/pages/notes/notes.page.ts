@@ -9,10 +9,7 @@ import { NotesService } from 'src/app/services/notes.service';
 })
 export class NotesPage implements OnInit {
 
-  constructor(public notesService: NotesService, private alertCtrl: AlertController, private navCtrl: NavController) {
-
-
-   }
+  constructor(public notesService: NotesService, private alertCtrl: AlertController) {}
 
   ngOnInit() {
     this.notesService.load();
