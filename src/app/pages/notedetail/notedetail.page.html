@@ -1,17 +1,21 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref='/notes'></ion-back-button>
+      <ion-back-button defaultHref="/notes"></ion-back-button>
     </ion-buttons>
     <ion-title>{{note.title}}</ion-title>
-    <ion-buttons slot='end'>
-      <ion-button (click) = "deleteNote()">
-        <ion-icon slot = 'icon-only' name="trash"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-button (click)="deleteNote()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-textarea (input) = "noteChanged()" [(ngModel)] = "note.content" placeholder="Add notes"></ion-textarea>
+<ion-content mode="ios">
+  <ion-textarea
+    (input)="noteChanged()"
+    [(ngModel)]="note.content"
+    placeholder="Add notes"
+  ></ion-textarea>
 </ion-content>

@@ -97,7 +97,7 @@ export class ExpensesPage implements OnInit {
   // Show Notes
   showNotes(item){
     this.alert.create({
-      header: 'Delete',
+      header: 'Notes',
       message: item.note,
       buttons: [
         {
