@@ -13,15 +13,16 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-list>
-    <ion-item
-      button
-      detail
-      *ngFor="let note of notesService.notes"
-      [routerLink]="'/notes/' + note.id"
-      routerDirection="forward"
-    >
-      <ion-label>{{ note.title }}</ion-label>
-    </ion-item>
-  </ion-list>
+  <ng-container *ngFor="let note of notesService.notes">
+    <ion-list>
+      <ion-item
+        button
+        detail
+        [routerLink]="'/notes/' + note.id"
+        routerDirection="forward"
+      >
+        <ion-label>{{ note.title }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container>
 </ion-content>
