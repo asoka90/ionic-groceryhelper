@@ -14,18 +14,19 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Total budget</ion-card-title>
-      <canvas #circleCanvas class="ion-padding"></canvas>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #circleCanvas></canvas>
       <ion-button
         (click)="reload()"
         expand="full"
         fill="outline"
         shape="round"
-        class="ion-padding"
         color="danger"
+        class="refresh-button"
         >Refresh</ion-button
       >
-      <!-- <p>&#8369;{{totalBudget}}</p> -->
-    </ion-card-header>
+    </ion-card-content>
   </ion-card>
 
   <ion-card>

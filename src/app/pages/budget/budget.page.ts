@@ -56,7 +56,19 @@ export class BudgetPage implements OnInit {
             hoverBackgroundColor: ["#FF6384", "#36A2EB"]
           }
         ]
-      }
+      },
+      options: {
+        plugins: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    font: {
+                        // size: 14
+                    }
+                }
+            }
+        }
+    }
     });
   }
 
