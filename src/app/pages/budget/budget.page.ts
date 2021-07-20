@@ -41,7 +41,6 @@ export class BudgetPage implements OnInit {
   
   // Doughnut Chart
   doughnutChartMethod() {
-    console.log(this.budgetitems);
     this.doughnutChart = new Chart(this.circleCanvas.nativeElement, {
       type: "doughnut",
       data: {
@@ -77,30 +76,36 @@ export class BudgetPage implements OnInit {
     this.budgetStorageService.getBudgetItems().then(items => {
       this.budgetitems = items;
       this.totalBudget = 0;
-      for(let i of this.budgetitems){
-        this.totalBudget = this.totalBudget + i.amount;
+      try {
+        for(let i of this.budgetitems){
+          this.totalBudget = this.totalBudget + i.amount;
+        }
+        console.log("Total Budget: " + this.totalBudget);
+      } catch (error) {
+        console.log("Budget data is empty");
       }
-
-      console.log("Total Budget: " + this.totalBudget);
-      
     });
 
     this.expensesStorageService.getExpenseItems().then(items => {
       this.expensesItems = items;
       this.totalExpenses = 0;
-      for(let i of this.expensesItems){
-        this.totalExpenses = this.totalExpenses + i.amount;
-      }
 
-      console.log("Total Expenses: " + this.totalExpenses);
-      if(this.totalExpenses > this.totalBudget){
-        this.alertBudget();
-      } else{
-        console.log("Everything is under Budget");
+      try {
+        for(let i of this.expensesItems){
+          this.totalExpenses = this.totalExpenses + i.amount;
+        }
+        console.log("Total Expenses: " + this.totalExpenses);
+
+        // Check if over budget
+        if(this.totalExpenses > this.totalBudget){
+          this.alertBudget();
+        } else{
+          console.log("Everything is under Budget");
+        }
+      } catch (error) {
+        console.log("Expenses data is empty")
       }
     })
-
-    
   }
 
   //  Delete
