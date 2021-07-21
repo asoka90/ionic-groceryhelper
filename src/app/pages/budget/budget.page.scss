@@ -29,3 +29,13 @@ ion-card {
   margin-top: 30px;
   text-align: center;
 }
+
+ion-list-header {
+  padding: 0;
+  border-top: 1px solid rgba(77, 70, 70, 0.45);
+}
+
+ion-list {
+  padding: 0;
+  // border-bottom: 1px solid rgba(77, 70, 70, 0.45);
+}
