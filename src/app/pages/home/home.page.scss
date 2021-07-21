@@ -1,0 +1,44 @@
+ion-card-title{
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+ion-card-subtitle{
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 400; 
+    color: #ffffff;
+    padding-top: 5px;
+}
+
+ion-label{
+    font-family: 'Roboto';
+    font-weight: 400;
+}
+
+h4{
+    color: var(--ion-color-medium-shade);
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: 15px;
+}
+
+img{
+    width:100px;
+}
+
+ion-title{
+    color: #ffffff;
+    font-family: "Montserrat";
+    font-weight: 700;
+}
+
+ion-buttons{
+    color: #ffffff;
+}
+
+ion-card{
+    --ion-card-background: linear-gradient(#00B4DB, #0083B0);
+}
