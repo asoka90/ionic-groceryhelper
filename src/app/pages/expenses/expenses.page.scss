@@ -2,12 +2,17 @@ ion-icon {
   font-size: 24px;
 }
 
-ion-title{
+ion-title {
   color: #ffffff;
   font-family: "Montserrat";
   font-weight: 700;
 }
 
-ion-buttons{
+ion-buttons {
   color: #ffffff;
+}
+
+ion-card {
+  margin-top: 30px;
+  border: 1px solid rgba(77, 70, 70, 0.45);
 }

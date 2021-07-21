@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content appFabhide mode="ios" scrollEvents="true">
+<ion-content appFabhide scrollEvents="true">
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="fab">
     <ion-fab-button (click)="openModal()">
       <ion-icon name="add"></ion-icon>
@@ -22,6 +22,7 @@
         shape="round"
         class="ion-padding"
         color="primary"
+        id="refreshButton"
         >Refresh</ion-button
       >
       <!-- <p>&#8369;{{totalBudget}}</p> -->
@@ -29,13 +30,13 @@
   </ion-card>
 
   <ion-card>
-    <ion-header>
-      <div class ="header">
+    <ion-card-title>
+      <div class="header">
         <ion-card-header>
           <ion-card-title>Budgets</ion-card-title>
         </ion-card-header>
       </div>
-    </ion-header>
+    </ion-card-title>
 
     <!-- Listing -->
     <ng-container *ngFor="let item of budgetitems">
