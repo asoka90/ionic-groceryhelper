@@ -5,6 +5,20 @@
   height: 100%;
 }
 
-ion-spinner {
-  transform: scale(3);
+ion-list-header {
+  font-size: 24px;
+  font-family: "Montserrat";
+  font-weight: 800;
+  --color: #39434e;
+  min-height: 20px;
+  display: block;
+  text-align: center;
+}
+
+ion-note {
+  display: inline-block;
+  font-size: 16px;
+  padding-top: 7px;
+
+  color: var(--ion-color-medium-shade);
 }
