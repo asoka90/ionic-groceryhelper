@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar mode="ios">
+  <ion-toolbar>
     <ion-title>Budget</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content appFabhide mode="ios" scrollEvents="true">
+<ion-content appFabhide scrollEvents="true">
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="fab">
     <ion-fab-button (click)="openModal()">
       <ion-icon name="add"></ion-icon>
@@ -22,19 +22,22 @@
         expand="full"
         fill="outline"
         shape="round"
-        color="danger"
-        class="refresh-button"
+        class="ion-padding"
+        color="primary"
+        id="refreshButton"
         >Refresh</ion-button
       >
     </ion-card-content>
   </ion-card>
 
   <ion-card>
-    <ion-header>
-      <ion-card-header>
-        <ion-card-title>Budgets</ion-card-title>
-      </ion-card-header>
-    </ion-header>
+    <ion-card-title>
+      <div class="header">
+        <ion-card-header>
+          <ion-card-title>Budgets</ion-card-title>
+        </ion-card-header>
+      </div>
+    </ion-card-title>
 
     <!-- Listing -->
     <ng-container *ngFor="let item of budgetitems">
