@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { checklistItem, ChecklistService } from 'src/app/services/checklist.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class UpdateListPage implements OnInit {
   @Input() itemPriority: string;
   @Input() itemCategory: string;
 
-  constructor(public modalCtlr:ModalController, public checklistService:ChecklistService) { }
+  constructor(public modalCtlr:ModalController, public checklistService:ChecklistService, public toast : ToastController) { }
 
   ngOnInit() {
     this.categories.push('Alcoholic Beverages')
@@ -49,5 +49,16 @@ export class UpdateListPage implements OnInit {
         // this.showToast('Item Updated');
       })
       this.dismis();
+
+      this.showToast("To-do list updated!");
+  }
+
+  // Toast
+  async showToast(msg){
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 }

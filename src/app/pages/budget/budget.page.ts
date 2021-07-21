@@ -112,7 +112,7 @@ export class BudgetPage implements OnInit {
   //  Delete
   deleteItem( item: budgetItem){
     this.budgetStorageService.deleteBudgetItems(item.id).then(item => {
-      this.showToast('Item Removed!');
+      this.showToast('Budget removed!');
       this.loadItems();
     })
     

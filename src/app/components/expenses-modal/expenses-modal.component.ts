@@ -61,7 +61,7 @@ export class ExpensesModalComponent implements OnInit {
     this.newItem.date = this.date;
     this.expensesStorageService.addExpenseItems(this.newItem).then(item => {
       this.newItem = <expensesItem>{};
-      this.showToast('Item added');
+      this.showToast('Expenses added!');
     })
     this.dismissModal();
   }
