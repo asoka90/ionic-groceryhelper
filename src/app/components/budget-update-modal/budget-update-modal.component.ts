@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
 import { budgetItem, budgetStorageService } from 'src/app/services/budgetStorage.service';
@@ -16,7 +16,7 @@ export interface Item{
 })
 export class BudgetUpdateModalComponent implements OnInit {
   budgetItem: any[] = [];
-  
+  checker:boolean = true;
   public updateBudgetForm: FormGroup;
 
   @Input() budgetID: string;
@@ -64,6 +64,24 @@ export class BudgetUpdateModalComponent implements OnInit {
       this.showToast('Item Updated');
     })
     this.dismissModal();
+  }
+
+  gotChar(eve) {
+    console.log(this.checker);
+    this.checker = eve.target.value > '0' ? true : false ;
+    if(eve.target.value < '1'){
+      this.showToast("Insufficient amount");
+      // this.render.setStyle()
+    }
+    
+  }
+
+  gotChange(eve) {
+    console.log(this.checker);
+    this.checker = eve.target.value < '0' ? true : false;
+    if(eve.target.value < '1'){
+      this.showToast("Insufficient amount");
+    }
   }
 
   // Toast

@@ -24,6 +24,7 @@
           required
           type="number"
           formControlName="budgetAmount"
+          (input)="gotChar($event)"
         ></ion-input>
       </ion-item>
 
@@ -31,7 +32,7 @@
       <ion-button
         expand="block"
         class="ion-margin-top"
-        [disabled]="updateBudgetForm.invalid"
+        [disabled]="updateBudgetForm.invalid || !checker"
         (click)="submitUpdateBudget(item)"
       >
         Confirm

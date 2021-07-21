@@ -18,6 +18,7 @@ export interface Item{
 })
 export class ExpensesUpdateModalComponent implements OnInit {
   expensesItem: any [] = [];
+  checker:boolean =true;
 
   public expenseUpdateForm: FormGroup;
 
@@ -71,6 +72,16 @@ export class ExpensesUpdateModalComponent implements OnInit {
 
   get Date(): string{
     return this.expenseUpdateForm.value['expensesDate']
+  }
+
+  gotChar(eve) {
+    console.log(this.checker);
+    this.checker = eve.target.value > '0' ? true : false ;
+    if(eve.target.value < '1'){
+      this.showToast("Insufficient amount");
+      // this.render.setStyle()
+    }
+    
   }
 
   // Update
