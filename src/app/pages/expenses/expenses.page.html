@@ -1,10 +1,10 @@
-<ion-header mode="ios">
+<ion-header>
   <ion-toolbar>
     <ion-title>Expenses</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content mode="ios">
+<ion-content>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="openModal()">
       <ion-icon name="add"></ion-icon>
@@ -19,7 +19,7 @@
       </ion-list-header>
       <ion-list>
         <ion-item-sliding>
-          <ion-item>
+          <ion-item button (click)="showNotes(item)">
             <ion-label>
               <h2 id="notes">Notes</h2>
               <p>{{item.note}}</p>

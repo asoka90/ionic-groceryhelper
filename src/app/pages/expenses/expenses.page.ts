@@ -94,6 +94,24 @@ export class ExpensesPage implements OnInit {
     });
   }
 
+  // Show Notes
+  showNotes(item){
+    this.alert.create({
+      header: 'Notes',
+      message: item.note,
+      buttons: [
+        {
+          text: 'Close',
+          handler: () => {
+            console.log('Closed');
+          }
+        }
+      ]
+    }).then(res => {
+      res.present();
+    });
+  }
+
   // Toast
   async showToast(msg){
     const toast = await this.toast.create({
