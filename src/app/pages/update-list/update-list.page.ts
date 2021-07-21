@@ -26,6 +26,8 @@ export class UpdateListPage implements OnInit {
     this.categories.push('Food')
     this.categories.push('Hygiene')
     this.categories.push('Pharmaceutical')
+
+    this.categorySelectedCategory = this.item.category;
   }
 
   selectCategory(index){
