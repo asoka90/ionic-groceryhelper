@@ -92,7 +92,7 @@ export class ExpensesUpdateModalComponent implements OnInit {
     item.date = this.Date;
 
     this.expensesStorageService.updateExpenseItems(item).then(() => {
-      this.showToast('Item Updated');
+      this.showToast('Expenses updated!');
     })
     this.dismissModal();
   }

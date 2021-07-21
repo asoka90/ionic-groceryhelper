@@ -11,10 +11,10 @@
     </ion-fab-button>
   </ion-fab>
   <!-- List -->
-  <ng-container *ngFor="let item of items" class="ion-padding">
+  <ng-container *ngFor="let item of items">
     <ion-card>
-      <ion-list-header>
-        <ion-label> {{item.name}} </ion-label>
+      <ion-list-header style="border-bottom: 1px solid rgba(77, 70, 70, 0.45)">
+        <ion-label style="font-size: 20px"> <b>{{item.name}}</b> </ion-label>
         <ion-button (click)="openUpdateModal(item)">Update</ion-button>
       </ion-list-header>
       <ion-list>
@@ -26,7 +26,9 @@
             </ion-label>
             <ion-note slot="end">
               <ion-text color="success">
-                <p>&#8369;{{item.amount}}</p>
+                <p style="font-weight: 500; font-size: 18px">
+                  &#8369;{{item.amount}}
+                </p>
               </ion-text>
               <p>{{item.date | date: 'dd/MM/YYYY'}}</p>
             </ion-note>

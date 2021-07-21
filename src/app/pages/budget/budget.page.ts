@@ -44,13 +44,13 @@ export class BudgetPage implements OnInit {
     this.doughnutChart = new Chart(this.circleCanvas.nativeElement, {
       type: "doughnut",
       data: {
-        labels: ["Total Budget", "Total Expenses"],
+        labels: ["Total Expenses", "Total Budget"],
         datasets: [
           {
-            data: [this.totalBudget, this.totalExpenses],
+            data: [this.totalExpenses, this.totalBudget],
             backgroundColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)"
+              "rgba(255, 99, 132, .7)",
+              "rgba(54, 162, 235, .7)"
             ],
             hoverBackgroundColor: ["#FF6384", "#36A2EB"]
           }
@@ -64,7 +64,8 @@ export class BudgetPage implements OnInit {
                     font: {
                         // size: 14
                     }
-                }
+                },
+                position: 'bottom'
             }
         }
     }
@@ -111,7 +112,7 @@ export class BudgetPage implements OnInit {
   //  Delete
   deleteItem( item: budgetItem){
     this.budgetStorageService.deleteBudgetItems(item.id).then(item => {
-      this.showToast('Item Removed!');
+      this.showToast('Budget removed!');
       this.loadItems();
     })
     

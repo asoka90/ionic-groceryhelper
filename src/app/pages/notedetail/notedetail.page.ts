@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { NotesService } from 'src/app/services/notes.service';
 import { Note } from 'src/app/interfaces/notes';
@@ -15,7 +15,7 @@ export class NotedetailPage implements OnInit {
 
   public note: Note;
 
-  constructor(private route: ActivatedRoute, private notesService: NotesService, private navCtrl: NavController) { 
+  constructor(private route: ActivatedRoute, private notesService: NotesService, private navCtrl: NavController, private toast : ToastController) { 
     //initialize a placeholder note hanggat maload ang actual note
     this.note = {
       id: '',
@@ -40,6 +40,10 @@ export class NotedetailPage implements OnInit {
     }
   }
 
+  ionViewDidLeave(){
+    this.showToast("Note Saved!");
+  }
+
   noteChanged(){
     this.notesService.save();
   }
@@ -49,4 +53,12 @@ export class NotedetailPage implements OnInit {
     this.navCtrl.navigateBack('/notes');
   }
   
+
+  async showToast(msg){
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
 }

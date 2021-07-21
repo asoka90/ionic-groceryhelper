@@ -17,7 +17,7 @@
     </ion-card-header>
     <ion-card-content>
       <canvas #circleCanvas></canvas>
-      <h1 id="total">&#8369;{{totalExpenses}}/&#8369;{{totalBudget}}</h1>
+      <h1 id="total">&#8369;{{totalExpenses}} / &#8369;{{totalBudget}}</h1>
       <ion-button
         (click)="reload()"
         expand="full"
@@ -32,40 +32,40 @@
   </ion-card>
 
   <ion-card>
-    <ion-card-title>
-      <div class="header">
-        <ion-card-header>
-          <ion-card-title>Budgets</ion-card-title>
-        </ion-card-header>
-      </div>
-    </ion-card-title>
+    <div class="header">
+      <ion-card-header>
+        <ion-card-title>Budgets</ion-card-title>
+      </ion-card-header>
+    </div>
 
-    <!-- Listing -->
-    <ng-container *ngFor="let item of budgetitems">
-      <ion-list-header>
-        <ion-label id="budgetName">{{item.name}}</ion-label>
-        <ion-button (click)="openUpdateModal(item)">Update</ion-button>
-      </ion-list-header>
-      <ion-list class="ion-padding">
-        <ion-item-sliding>
-          <ion-item detail>
-            <ion-label text-wrap>
-              <ion-text color="success">
-                <h2>&#8369;{{item.amount}}</h2>
-              </ion-text>
-            </ion-label>
-          </ion-item>
-          <ion-item-options slide="end">
-            <ion-item-option color="primary" (click)="openUpdateModal(item)">
-              <ion-icon name="create-outline"></ion-icon>
-            </ion-item-option>
-            <ion-item-option color="danger" (click)="delete(item)">
-              <ion-icon name="trash-bin-outline"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
-    </ng-container>
+    <ion-card-content>
+      <!-- Listing -->
+      <ng-container *ngFor="let item of budgetitems">
+        <ion-list-header>
+          <ion-label id="budgetName">{{item.name}}</ion-label>
+          <ion-button (click)="openUpdateModal(item)">Update</ion-button>
+        </ion-list-header>
+        <ion-list class="ion-padding">
+          <ion-item-sliding>
+            <ion-item detail lines="none">
+              <ion-label text-wrap>
+                <ion-text color="success">
+                  <h2>&#8369;{{item.amount}}</h2>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+            <ion-item-options slide="end">
+              <ion-item-option color="primary" (click)="openUpdateModal(item)">
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-item-option>
+              <ion-item-option color="danger" (click)="delete(item)">
+                <ion-icon name="trash-bin-outline"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ng-container>
+    </ion-card-content>
   </ion-card>
 
   <!--  -->

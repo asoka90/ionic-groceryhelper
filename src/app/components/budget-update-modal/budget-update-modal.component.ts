@@ -61,7 +61,7 @@ export class BudgetUpdateModalComponent implements OnInit {
     item.name = this.name;
     item.amount = this.amount;
     this.budgetStorageService.updateBudgetItems(item).then(() => {
-      this.showToast('Item Updated');
+      this.showToast('Budget updated!');
     })
     this.dismissModal();
   }

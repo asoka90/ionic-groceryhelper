@@ -42,7 +42,7 @@ export class BudgetModalComponent implements OnInit {
     this.newItem.amount = this.amount;
     this.storageService.addBudgetItems(this.newItem).then(item => {
       this.newItem = <budgetItem>{};
-      this.showToast('Item added');
+      this.showToast('Budget added!');
     })
     this.dismissModal();
   }

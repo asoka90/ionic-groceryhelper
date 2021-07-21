@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { ToastController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 
 import { Note } from "../interfaces/notes";
@@ -12,7 +13,7 @@ export class NotesService{
     public notes: Note[] = []
     public loaded: boolean = false;
 
-    constructor(private storage: Storage){
+    constructor(private storage: Storage, private toast : ToastController){
         this.init()
     }
     
@@ -53,6 +54,8 @@ export class NotesService{
         });
 
         this.save();
+
+        this.showToast("Note added!");
     }
 
     deleteNote(note):void{
@@ -64,10 +67,20 @@ export class NotesService{
             this.notes.splice(index, 1);
             this.save();
         }
+
+        this.showToast("Note removed!")
     }
 
     async init(){
         await this.storage.create()
     }
+
+    async showToast(msg){
+        const toast = await this.toast.create({
+          message: msg,
+          duration: 2000
+        });
+        toast.present();
+      }
 } 
 

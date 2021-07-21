@@ -32,7 +32,7 @@ export class ExpensesPage implements OnInit {
   //  Delete
   deleteItem( item: expensesItem){
     this.storageService.deleteExpenseItems(item.id).then(item => {
-      this.showToast('Item Removed!');
+      this.showToast('Expenses removed!');
       this.loadItems();
     })
   }
